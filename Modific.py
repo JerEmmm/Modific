@@ -104,9 +104,9 @@ def _make_text_safeish(text, fallback_encoding, method='decode'):
     # distinctly non-ideal... and there's no way to tell what's coming out of
     # git in output. So...
     try:
-        unitext = getattr(text, method)('utf-8')
+        unitext = getattr(text, method)('utf-8', 'ignore')
     except (UnicodeEncodeError, UnicodeDecodeError):
-        unitext = getattr(text, method)(fallback_encoding)
+        unitext = getattr(text, method)(fallback_encoding, 'ignore')
     except AttributeError:
         # strongly implies we're already unicode, but just in case let's cast
         # to string
